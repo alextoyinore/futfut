@@ -81,6 +81,17 @@ WSGI_APPLICATION = 'futfut.wsgi.application'
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'futbk',
+        'HOST': 'localhost',
+        'USER': 'root',
+        'PASSWORD': '',
+        'PORT': '3306',
+         "OPTIONS": {
+            "init_command": "SET innodb_strict_mode=1",
+        },
+    },
+    'sqlite': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
@@ -116,6 +127,9 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+# Auth user model
+AUTH_USER_MODEL = 'futbk.FutUser'
 
 
 # Static files (CSS, JavaScript, Images)
