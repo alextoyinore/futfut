@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import FutUser, Geo, Address, Base, BaseMember, Bookmark, Post, Reply, Republish, Like, Follow, Message, \
+from .models import FutUser, Geo, Address, Base, BaseMember, Bookmark, Post, Republish, Like, Follow, Message, \
     Notification, View
 
 
@@ -41,10 +41,10 @@ class BaseMemberSerializer(serializers.Serializer):
         fields = '__all__'
 
 
-class ReplySerializer(serializers.Serializer):
-    class Meta:
-        model = Reply
-        fields = '__all__'
+# class ReplySerializer(serializers.Serializer):
+#     class Meta:
+#         model = Reply
+#         fields = '__all__'
 
 
 class LikeSerializer(serializers.Serializer):

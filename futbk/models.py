@@ -13,8 +13,8 @@ class FutUser(AbstractUser):
         ), null=True)
     tag_line = models.CharField(max_length=100, null=True)
     occupation = models.CharField(max_length=100, null=True)
-    profile_img = models.CharField(max_length=1000, null=True)
-    profile_banner = models.CharField(max_length=1000, null=True)
+    profile_img = models.URLField(null=True)
+    profile_banner = models.URLField(null=True)
     date_joined = models.DateField(auto_now=True, auto_now_add=False)
     address = models.ForeignKey('Address', on_delete=models.SET_NULL, null=True)
     activated = models.BooleanField(default=True)
@@ -48,8 +48,8 @@ class Base(models.Model):
     title = models.CharField(max_length=100, null=False, unique=True)
     user = models.ForeignKey('FutUser', on_delete=models.PROTECT)
     description = models.TextField(max_length=500)
-    base_img = models.CharField(max_length=1000)
-    base_banner = models.CharField(max_length=1000)
+    base_img = models.URLField(null=True)
+    base_banner = models.URLField(null=True)
     date = models.DateField(auto_now=True, auto_now_add=False)
 
     def __str__(self):
@@ -70,8 +70,10 @@ class BaseMember(models.Model):
 
 class Post(models.Model):
     text = models.TextField(max_length=300, null=True)
-    image = models.CharField(max_length=1000, null=True)
-    video = models.TextField(max_length=1000, null=True)
+    image = models.URLField(null=True)
+    video = models.URLField(null=True)
+    reply = models.BooleanField(default=False)
+    parent = models.ManyToManyField('self', symmetrical=False)
     date = models.DateTimeField(auto_now=True, auto_now_add=False)
     user = models.ForeignKey('FutUser', on_delete=models.PROTECT, null=False)
     base = models.ForeignKey('Base', on_delete=models.SET_NULL, null=True)
@@ -80,23 +82,6 @@ class Post(models.Model):
         return self.text
 
     class Meta:
-        ordering = ['date']
-        unique_together = ('text', 'user')
-
-
-class Reply(models.Model):
-    text = models.TextField(max_length=300, null=True)
-    image = models.CharField(max_length=1000, null=True)
-    video = models.TextField(max_length=1000, null=True)
-    date = models.DateTimeField(auto_now=True, auto_now_add=False)
-    user = models.ForeignKey('FutUser', on_delete=models.PROTECT, null=False)
-    post = models.ForeignKey('Post', on_delete=models.PROTECT, null=False)
-
-    def __str__(self):
-        return self.text
-
-    class Meta:
-        db_table = 'Replies'
         ordering = ['date']
         unique_together = ('text', 'user')
 
@@ -167,7 +152,7 @@ class Follow(models.Model):
 class Message(models.Model):
     title = models.CharField(max_length=100)
     msg_sender = models.ForeignKey('FutUser', on_delete=models.PROTECT, related_name='sender')
-    msg_receiver = models.ForeignKey('FutUser', on_delete=models.PROTECT, related_name='reciever')
+    msg_receiver = models.ForeignKey('FutUser', on_delete=models.PROTECT, related_name='receiver')
     image = models.CharField(max_length=1000)
     video = models.CharField(max_length=1000)
     text = models.CharField(max_length=5000)

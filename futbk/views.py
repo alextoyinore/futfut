@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from rest_framework.response import Response
+
 from .models import *
 from .serializers import *
 from rest_framework import generics
@@ -12,7 +14,7 @@ class FutUserView(generics.ListCreateAPIView):
 
 
 class FutUserSingleView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = FutUser.objects.prefetch_related('address').get()
+    queryset = FutUser.objects.prefetch_related('address')
     serializer_class = FutUserSerializer
 
 
@@ -22,7 +24,7 @@ class BaseView(generics.ListCreateAPIView):
 
 
 class BaseSingleView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Base.objects.prefetch_related('user').get()
+    queryset = Base.objects.prefetch_related('user')
     serializer_class = BaseSerializer
 
 
@@ -32,7 +34,7 @@ class BaseMemberView(generics.ListCreateAPIView):
 
 
 class BaseMemberSingleView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = BaseMember.objects.prefetch_related('user').get()
+    queryset = BaseMember.objects.prefetch_related('user')
     serializer_class = BaseMemberSerializer
 
 
@@ -42,18 +44,23 @@ class PostView(generics.ListCreateAPIView):
 
 
 class PostSingleView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Post.objects.prefetch_related('user', 'base').get()
+    queryset = Post.objects.prefetch_related('user', 'base')
     serializer_class = PostSerializer
 
 
-class ReplyView(generics.ListCreateAPIView):
-    queryset = Reply.objects.prefetch_related('user', 'post').all()
-    serializer_class = ReplySerializer
+class FeedView(generics.ListAPIView):
+    queryset = Post.objects.prefetch_related('user', 'base')
+    serializer_class = PostSerializer
 
 
-class ReplySingleView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Reply.objects.prefetch_related('user', 'post').get()
-    serializer_class = ReplySerializer
+# class ReplyView(generics.ListCreateAPIView):
+#     queryset = Reply.objects.prefetch_related('user', 'post').all()
+#     serializer_class = ReplySerializer
+#
+#
+# class ReplySingleView(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Reply.objects.prefetch_related('user', 'post')
+#     serializer_class = ReplySerializer
 
 
 class ViewsView(generics.ListCreateAPIView):
@@ -61,8 +68,8 @@ class ViewsView(generics.ListCreateAPIView):
     serializer_class = ViewSerializer
 
 
-class ViewsSingleView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = View.objects.prefetch_related('user', 'post').get()
+class ViewsSingleView(generics.RetrieveDestroyAPIView):
+    queryset = View.objects.prefetch_related('user', 'post')
     serializer_class = ViewSerializer
 
 
@@ -71,8 +78,8 @@ class BookmarkView(generics.ListCreateAPIView):
     serializer_class = BookmarkSerializer
 
 
-class BookmarkSingleView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Bookmark.objects.prefetch_related('user', 'post').get()
+class BookmarkSingleView(generics.RetrieveDestroyAPIView):
+    queryset = Bookmark.objects.prefetch_related('user', 'post')
     serializer_class = BookmarkSerializer
 
 
@@ -81,8 +88,8 @@ class RepublishView(generics.ListCreateAPIView):
     serializer_class = RepublishSerializer
 
 
-class RepublishSingleView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Republish.objects.prefetch_related('user', 'post').get()
+class RepublishSingleView(generics.RetrieveDestroyAPIView):
+    queryset = Republish.objects.prefetch_related('user', 'post')
     serializer_class = RepublishSerializer
 
 
@@ -91,8 +98,8 @@ class FollowView(generics.ListCreateAPIView):
     serializer_class = FollowSerializer
 
 
-class FollowSingleView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Follow.objects.prefetch_related('user').get()
+class FollowSingleView(generics.RetrieveDestroyAPIView):
+    queryset = Follow.objects.prefetch_related('user')
     serializer_class = FollowSerializer
 
 
@@ -102,7 +109,7 @@ class MessageView(generics.ListCreateAPIView):
 
 
 class MessageSingleView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Message.objects.prefetch_related('user').get()
+    queryset = Message.objects.prefetch_related('user')
     serializer_class = MessageSerializer
 
 
@@ -112,5 +119,5 @@ class NotificationView(generics.ListCreateAPIView):
 
 
 class NotificationSingleView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Notification.objects.prefetch_related('user').get()
+    queryset = Notification.objects.prefetch_related('user')
     serializer_class = NotificationSerializer
