@@ -3,8 +3,9 @@ from .views import *
 
 # Creating paths here
 
-
 urlpatterns = [
+
+    # base endpoints
     path('base/', BaseView.as_view(), name='bases'),
     path('base/<int:pk>', BaseSingleView.as_view(), name='base'),
 
@@ -46,5 +47,6 @@ urlpatterns = [
     # notifications endpoints
     path('notification/', NotificationView.as_view(), name='notifications'),
     path('notification/<int:pk>', NotificationSingleView.as_view(), name='notification'),
+
 ]
 

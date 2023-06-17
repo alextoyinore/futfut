@@ -24,3 +24,4 @@ urlpatterns = [
     path('futbk/', include('djoser.urls.authtoken')),
     path('futbk/', include('djoser.social.urls'))
 ]
+

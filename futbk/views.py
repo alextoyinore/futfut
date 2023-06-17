@@ -1,10 +1,8 @@
 from django.shortcuts import render
 from rest_framework.response import Response
-
 from .models import *
 from .serializers import *
 from rest_framework import generics
-
 
 # Create your views here.
 
@@ -108,7 +106,7 @@ class MessageView(generics.ListCreateAPIView):
     serializer_class = MessageSerializer
 
 
-class MessageSingleView(generics.RetrieveUpdateDestroyAPIView):
+class MessageSingleView(generics.RetrieveDestroyAPIView):
     queryset = Message.objects.prefetch_related('user')
     serializer_class = MessageSerializer
 
@@ -118,6 +116,7 @@ class NotificationView(generics.ListCreateAPIView):
     serializer_class = NotificationSerializer
 
 
-class NotificationSingleView(generics.RetrieveUpdateDestroyAPIView):
+class NotificationSingleView(generics.RetrieveDestroyAPIView):
     queryset = Notification.objects.prefetch_related('user')
     serializer_class = NotificationSerializer
+
