@@ -3,87 +3,87 @@ from .models import FutUser, Geo, Address, Base, BaseMember, Bookmark, Post, Rep
     Notification, View
 
 
-class FutUserSerializer(serializers.Serializer):
+class GeoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Geo
+        fields = '__all__'
+
+
+class AddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Address
+        fields = '__all__'
+
+
+class FutUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = FutUser
         fields = '__all__'
         depth = 2
 
 
-class GeoSerializer(serializers.Serializer):
-    class Meta:
-        model = Geo
-        fields = '__all__'
-
-
-class AddressSerializer(serializers.Serializer):
-    class Meta:
-        model = Address
-        fields = '__all__'
-
-
-class BaseSerializer(serializers.Serializer):
+class BaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Base
         fields = '__all__'
 
 
-class PostSerializer(serializers.Serializer):
+class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = '__all__'
         depth = 1
 
 
-class BaseMemberSerializer(serializers.Serializer):
+class BaseMemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = BaseMember
         fields = '__all__'
 
 
-# class ReplySerializer(serializers.Serializer):
+# class ReplySerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Reply
 #         fields = '__all__'
 
 
-class LikeSerializer(serializers.Serializer):
+class LikeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Like
         fields = '__all__'
 
 
-class ViewSerializer(serializers.Serializer):
+class ViewSerializer(serializers.ModelSerializer):
     class Meta:
         model = View
         fields = '__all__'
 
 
-class BookmarkSerializer(serializers.Serializer):
+class BookmarkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bookmark
         fields = '__all__'
 
 
-class RepublishSerializer(serializers.Serializer):
+class RepublishSerializer(serializers.ModelSerializer):
     class Meta:
         model = Republish
         fields = '__all__'
 
 
-class FollowSerializer(serializers.Serializer):
+class FollowSerializer(serializers.ModelSerializer):
     class Meta:
         model = Follow
         fields = '__all__'
 
 
-class MessageSerializer(serializers.Serializer):
+class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
         fields = '__all__'
 
 
-class NotificationSerializer(serializers.Serializer):
+class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notification
         fields = '__all__'

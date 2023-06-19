@@ -1,31 +1,35 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from .manager import FutUserManager
 
 # Create your models here.
+
 class FutUser(AbstractUser):
+    age = models.IntegerField()
     gender = models.CharField(
         max_length=1,
         choices=(
             ('M', 'Male'),
             ('F', 'Female'),
-            ('', 'Rather Not Say')
-        ), null=True)
-    tag_line = models.CharField(max_length=100, null=True)
-    occupation = models.CharField(max_length=100, null=True)
-    profile_img = models.URLField(null=True)
-    profile_banner = models.URLField(null=True)
+            ('R', 'Rather Not Say')
+        ), default='R')
+    tag_line = models.CharField(max_length=100, null=True, blank=True)
+    occupation = models.CharField(max_length=100, null=True, blank=True)
+    profile_img = models.URLField(null=True, blank=True)
+    profile_banner = models.URLField(null=True, blank=True)
     date_joined = models.DateField(auto_now=True, auto_now_add=False)
-    address = models.ForeignKey('Address', on_delete=models.SET_NULL, null=True)
+    address = models.ForeignKey('Address', on_delete=models.SET_NULL, null=True, blank=True)
     activated = models.BooleanField(default=True)
+
+    objects = FutUserManager()
 
     def __str__(self):
         return self.username
 
 
 class Geo(models.Model):
-    lat = models.DecimalField(max_digits=10, decimal_places=4, null=False)
-    long = models.DecimalField(max_digits=10, decimal_places=4, null=False)
+    lat = models.DecimalField(max_digits=6, decimal_places=4, null=False)
+    long = models.DecimalField(max_digits=6, decimal_places=4, null=False)
 
     def __str__(self):
         return f'${str(self.lat), str(self.long)}'
@@ -153,8 +157,8 @@ class Message(models.Model):
     title = models.CharField(max_length=100)
     msg_sender = models.ForeignKey('FutUser', on_delete=models.PROTECT, related_name='sender')
     msg_receiver = models.ForeignKey('FutUser', on_delete=models.PROTECT, related_name='receiver')
-    image = models.CharField(max_length=1000)
-    video = models.CharField(max_length=1000)
+    image = models.URLField()
+    video = models.URLField()
     text = models.CharField(max_length=5000)
     date = models.DateTimeField(auto_now=True)
 
@@ -173,3 +177,4 @@ class Notification(models.Model):
 
     def __str__(self):
         return self.title
+
