@@ -5,6 +5,14 @@ from .views import *
 
 urlpatterns = [
 
+    # geo endpoints
+    path('geo/', GeoView.as_view(), name='geos'),
+    path('geo/<int:pk>', GeoSingleView.as_view(), name='geo'),
+
+    # address endpoints
+    path('address/', AddressView.as_view(), name='addresses'),
+    path('address/<int:pk>', AddressSingleView.as_view(), name='address'),
+
     # base endpoints
     path('base/', BaseView.as_view(), name='bases'),
     path('base/<int:pk>', BaseSingleView.as_view(), name='base'),

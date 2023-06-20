@@ -1,3 +1,4 @@
 venv/
 futbk/__pycache__/
 futbk/migrations/
+futfut.session.sql

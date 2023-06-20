@@ -7,6 +7,26 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 # Create your views here.
 
+class GeoView(generics.ListCreateAPIView):
+    queryset = Geo.objects.all()
+    serializer_class = GeoSerializer
+
+
+class GeoSingleView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Geo.objects.all()
+    serializer_class = GeoSerializer
+
+
+class AddressView(generics.ListCreateAPIView):
+    queryset = Address.objects.all()
+    serializer_class = AddressSerializer
+
+
+class AddressSingleView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Address.objects.all()
+    serializer_class = AddressSerializer
+
+
 class FutUserView(generics.ListCreateAPIView):
     queryset = FutUser.objects.prefetch_related('address').all()
     serializer_class = FutUserSerializer

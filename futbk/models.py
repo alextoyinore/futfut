@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class FutUser(AbstractUser):
-    age = models.IntegerField()
+    age = models.PositiveIntegerField()
     gender = models.CharField(
         max_length=1,
         choices=(
@@ -18,6 +18,7 @@ class FutUser(AbstractUser):
     profile_banner = models.URLField(null=True, blank=True)
     date_joined = models.DateField(auto_now=True, auto_now_add=False)
     address = models.ForeignKey('Address', on_delete=models.SET_NULL, null=True, blank=True)
+    phone = models.PositiveIntegerField()
     activated = models.BooleanField(default=True)
 
     def __str__(self):
