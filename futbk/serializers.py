@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from djoser.serializers import UserCreateSerializer, UserSerializer
 from .models import FutUser, Geo, Address, Base, BaseMember, Bookmark, Post, Republish, Like, Follow, Message, \
     Notification, View
 
@@ -15,8 +16,14 @@ class AddressSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class FutUserSerializer(serializers.ModelSerializer):
-    class Meta:
+class FutUserCreateSerializer(UserCreateSerializer):
+    class Meta(UserCreateSerializer.Meta):
+        model = FutUser
+        fields = '__all__'
+        depth = 2
+
+class FutUserSerializer(UserSerializer):
+    class Meta(UserSerializer.Meta):
         model = FutUser
         fields = '__all__'
         depth = 2

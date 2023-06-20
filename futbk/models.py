@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from .manager import FutUserManager
 
 # Create your models here.
 
@@ -21,15 +20,13 @@ class FutUser(AbstractUser):
     address = models.ForeignKey('Address', on_delete=models.SET_NULL, null=True, blank=True)
     activated = models.BooleanField(default=True)
 
-    objects = FutUserManager()
-
     def __str__(self):
         return self.username
 
 
 class Geo(models.Model):
     lat = models.DecimalField(max_digits=6, decimal_places=4, null=False)
-    long = models.DecimalField(max_digits=6, decimal_places=4, null=False)
+    lon = models.DecimalField(max_digits=6, decimal_places=4, null=False)
 
     def __str__(self):
         return f'${str(self.lat), str(self.long)}'

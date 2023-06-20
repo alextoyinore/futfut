@@ -15,7 +15,6 @@ class FutUserManager(UserManager):
         extra_fields.setdefault('is_active', True)
 
         if extra_fields.get('is_staff') is not True:
-            raise ValueError('Superuser must set is_staff to true')
-        
+            raise ValueError('Superuser must set is_staff to true')  
         return self.create_user(username, email, password, **extra_fields)
 

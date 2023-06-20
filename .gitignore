@@ -1,1 +1,3 @@
-venv
+venv/
+futbk/__pycache__/
+futbk/migrations/

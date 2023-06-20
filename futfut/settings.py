@@ -159,5 +159,11 @@ REST_FRAMEWORK = {
 
 DJOSER = {
     'USER_ID_FIELD': 'username',
+    # 'USER_CREATE_PASSWORD_RETYPE': True,
+    'SERIALIZERS':{
+        'user_create': 'futbk.serializers.FutUserCreateSerializer',
+        'user': 'futbk.serializers.FutUserSerializer',
+        'current_user': 'djoser.serializers.UserSerializer'
+    }
 }
 

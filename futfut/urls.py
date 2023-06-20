@@ -16,12 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from djoser.views import TokenCreateView, TokenDestroyView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('futbk/', include('futbk.urls')),
     path('futbk/', include('djoser.urls')),
     path('futbk/', include('djoser.urls.authtoken')),
+    path('futbk/token', TokenCreateView.as_view(), name='token_create'),
+    path('futbk/token/logout', TokenDestroyView.as_view(), name='token_destroy'),
     path('futbk/', include('djoser.social.urls'))
 ]
 

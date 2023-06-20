@@ -14,7 +14,7 @@ admin.site.register(FutUser, FutUserAdmin)
 
 
 class GeoAdmin(admin.ModelAdmin):
-    list_display = ['id', 'lat', 'long']
+    list_display = ['id', 'lat', 'lon']
 
 
 admin.site.register(Geo, GeoAdmin)
