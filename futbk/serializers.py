@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from djoser.serializers import UserCreateSerializer, UserSerializer
-from .models import FutUser, Geo, Address, Base, BaseMember, Bookmark, Post, Republish, Like, Follow, Message, \
-    Notification, View
+from .models import *
 
 
 class GeoSerializer(serializers.ModelSerializer):
@@ -41,17 +40,30 @@ class PostSerializer(serializers.ModelSerializer):
         fields = '__all__'
         depth = 1
 
+class PollPostOptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PollPostOption
+        fields = '__all__'
+
+class PollPostResponseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PollPostResponse
+        fields = '__all__'
+
+class QuestionPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = QuestionPost
+        fields = '__all__'
+
+class QuestionPostResponseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = QuestionPostResponse
+        fields = '__all__'
 
 class BaseMemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = BaseMember
         fields = '__all__'
-
-
-# class ReplySerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Reply
-#         fields = '__all__'
 
 
 class LikeSerializer(serializers.ModelSerializer):
@@ -94,4 +106,3 @@ class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notification
         fields = '__all__'
-

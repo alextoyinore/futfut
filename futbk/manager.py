@@ -7,7 +7,7 @@ class FutUserManager(UserManager):
         if not username:
             raise ValueError('Username is required')
         extra_fields.setdefault('age', 0)
-        return create_user(username, email, password, **extra_fields)
+        return self.create_user(username, email, password, **extra_fields)
 
     def create_super_user(self, username, email, password, **extra_fields):
         extra_fields.setdefault('is_staff', True)

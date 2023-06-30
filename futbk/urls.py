@@ -25,12 +25,13 @@ urlpatterns = [
     path('post/', PostView.as_view(), name='posts'),
     path('post/<int:pk>', PostSingleView.as_view(), name='post'),
 
+    # TODO: Urls for PollPostOption, PollPostResponse views
+    # TODO: Urls for PollPostOption, PollPostResponse single views
+    # TODO: Urls for QuestionPost, QuestionPostResponse views
+    # TODO: Urls for PollPostOption, PollPostResponse single views
+
     # feed endpoints
     path('feed/', FeedView.as_view(), name='feeds'),
-
-    # reply endpoints
-    # path('reply/', ReplyView.as_view(), name='replies'),
-    # path('reply/<int:id>', ReplySingleView.as_view(), name='reply'),
 
     # views endpoints
     path('view/', ViewsView.as_view(), name='views'),
@@ -57,4 +58,3 @@ urlpatterns = [
     path('notification/<int:pk>', NotificationSingleView.as_view(), name='notification'),
 
 ]
-
