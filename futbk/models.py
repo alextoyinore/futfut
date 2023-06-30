@@ -73,7 +73,7 @@ class BaseMember(models.Model):
 '''
 
 class Post(models.Model):
-    text = models.TextField(max_length=300, null=True)
+    text = models.CharField(max_length=222, null=True)
     image = models.URLField(null=True)
     video = models.URLField(null=True)
     poll = models.BooleanField(default=False)
@@ -123,7 +123,7 @@ class PollPostResponse(models.Model):
 
 class QuestionPost(models.Model):
     post = models.ForeignKey('Post', on_delete=models.PROTECT)
-    question = models.TextField(max_length=2000, unique=True)
+    question = models.CharField(max_length=222)
 
     def __str__(self):
         return self.question
@@ -205,7 +205,6 @@ class Republish(models.Model):
     def __str__(self):
         return self.post.id
     class Meta:
-        db_table = 'Republish'
         unique_together = ('post', 'user')
 
 '''
@@ -235,7 +234,7 @@ class Message(models.Model):
     msg_receiver = models.ForeignKey('FutUser', on_delete=models.PROTECT, related_name='receiver')
     image = models.URLField()
     video = models.URLField()
-    text = models.CharField(max_length=5000)
+    text = models.CharField(max_length=222)
     date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
